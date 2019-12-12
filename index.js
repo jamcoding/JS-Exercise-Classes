@@ -52,7 +52,7 @@ class Person {
     }
   }
   poop() {
-    if(this.stomach.length = 10) {
+    if(this.stomach.length >= 10) {
       this.stomach = [];
     }
   }
@@ -84,6 +84,16 @@ class Car {
   }
   fill(gallons) {
     return this.tank += gallons;
+  }
+  drive(distance) {
+    if (this.tank * this.milesPerGallon > distance) {
+      this.odometer = distance;
+      this.tank = this.tank - distance / this.milesPerGallon;
+    } else {
+      this.odometer = this.milesPerGallon * this.tank;
+      this.tank = 0;
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    }
   }
 }
 
@@ -127,7 +137,6 @@ class Lambdasian {
 class Instructor extends Lambdasian {
   constructor(objectName) {
     super(objectName);
-    this.isInstructor = objectName.isInstructor;
     this.specialty = objectName.specialty;
     this.favLanguage = objectName.favLanguage;
     this.catchPhrase = objectName.catchPhrase;
@@ -155,8 +164,22 @@ class Instructor extends Lambdasian {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
-
+class Student extends Lambdasian {
+  constructor(objectName2) {
+    super(objectName2);
+    this.previousBackground = objectName2.previousBackground;
+    this.className = objectName2.className;
+    this.favSubjects = objectName2.favSubjects;
+  }
+  listSubjects() {
+    return `${this.favSubjects}`;
+  }
+  PRAssignment(subject) {
+    return `${this.name} has submitted a PR for ${subject}`;
+  }
+  sprintChallenge(subject) {
+    return `${this.name} has begun sprint challenge on ${subject}`;
+  }
 }
 
 /*
@@ -172,8 +195,18 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
-
+class ProjectManager extends Instructor {
+  constructor(objectName3){
+    super(objectName3);
+    this.gradClassName = objectName3.gradClassName;
+    this.favInstructor = objectName3.favInstructor;
+  }
+  standUp(channel) {
+    return `${this.name} announces to ${channel}, @channel standby times!`;
+  }
+  debugsCode(student, subject) {
+    return `${this.name} debugs ${student.name}'s code on ${subject}`;
+  }
 }
 
 /*
